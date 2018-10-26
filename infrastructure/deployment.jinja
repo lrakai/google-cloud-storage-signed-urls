@@ -1,0 +1,24 @@
+resources:
+- name: signer-serviceaccount
+  type: iam.v1.serviceAccount
+  properties:
+    accountId: storage-signer
+    displayName: storage-signer
+- name: storage-signer-key
+  type: iam.v1.serviceAccounts.key
+  properties:
+    parent: $(ref.signer-serviceaccount.name)
+- name: ca-lab-bucket-{{ env["current_time"] }}
+  type: storage.v1.bucket
+  properties:
+    storageClass: REGIONAL
+    location: us-central1
+    acl:
+    - role: OWNER
+      entity: project-owners-{{ env["project_number"] }}
+    - role: OWNER
+      entity: project-editors-{{ env["project_number"] }}
+    - role: READER
+      entity: project-viewers-{{ env["project_number"] }}
+    - role: WRITER
+      entity: "user-$(ref.signer-serviceaccount.email)"
