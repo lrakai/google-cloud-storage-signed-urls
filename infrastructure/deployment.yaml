@@ -1,0 +1,26 @@
+resources:
+- name: Student Role
+  type: gcp-types/iam-v1:projects.roles
+  properties:
+    parent: projects/ca-labs
+    roleId: studentrole
+    role:
+      title: StudentRole
+      description: Role for students to complete the Lab
+      stage: GA
+      includedPermissions:
+        - resourcemanager.projects.get
+        - storage.buckets.create
+        - storage.buckets.delete
+        - storage.buckets.get
+        - storage.buckets.getIamPolicy
+        - storage.buckets.list
+        - storage.buckets.setIamPolicy
+        - storage.buckets.update
+        - storage.objects.create
+        - storage.objects.delete
+        - storage.objects.get
+        - storage.objects.getIamPolicy
+        - storage.objects.list
+        - storage.objects.setIamPolicy
+        - storage.objects.update
