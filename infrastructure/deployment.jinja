@@ -4,10 +4,6 @@ resources:
   properties:
     accountId: storage-signer
     displayName: storage-signer
-- name: storage-signer-key
-  type: iam.v1.serviceAccounts.key
-  properties:
-    parent: $(ref.signer-serviceaccount.name)
 - name: ca-lab-bucket-{{ env["current_time"] }}
   type: storage.v1.bucket
   properties:
