@@ -9,12 +9,3 @@ resources:
   properties:
     storageClass: REGIONAL
     location: us-central1
-    acl:
-    - role: OWNER
-      entity: project-owners-{{ env["project_number"] }}
-    - role: OWNER
-      entity: project-editors-{{ env["project_number"] }}
-    - role: READER
-      entity: project-viewers-{{ env["project_number"] }}
-    - role: WRITER
-      entity: "user-$(ref.signer-serviceaccount.email)"
