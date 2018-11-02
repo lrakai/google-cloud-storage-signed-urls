@@ -1,6 +1,8 @@
 # google-cloud-storage-signed-urls
 
-Lab to demonstrate how to create presigned URLs for secure access to objects in Cloud Storage
+Lab to demonstrate how to create signed URLs for granting anyone with the URL access to objects in Cloud Storage.
+
+![Final Environment](https://user-images.githubusercontent.com/3911650/47931260-e64a7c00-de93-11e8-8695-bb178d9de59d.png)
 
 ## Getting Started
 
