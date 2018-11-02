@@ -59,7 +59,38 @@ Lab to demonstrate how to create presigned URLs for secure access to objects in 
 
 1. Start a Google Cloud Shell session.
 
-1. 
+1. Create a key for the pre-created storage account:
+
+    ```sh
+    sa_email=$(gcloud iam service-accounts list --format='value(email)' | grep storage-signer) # service account email (ID)
+    gcloud iam service-accounts keys create --iam-account $sa_email key.json
+    ```
+
+1. Upload a file to the pre-created bucket:
+
+    ```sh
+    curl -L https://github.com/cloudacademy/gcp-lab-artifacts/raw/master/gcs/ca.png -o ca.png
+    bucket=$(gsutil ls -b | sed 's/\/$//') # bucket with trailing slash removed
+    gsutil cp ca.png $bucket
+    ```
+
+1. Install the Python OpenSSL library (required for signing URLs):
+
+    ```sh
+    pip install pyopenssl --user
+    ```
+
+1. Grant the service account read access to the object:
+
+    ```sh
+    gsutil acl ch -u $sa_email:READ $bucket/ca.png
+    ```
+
+1. Create a signed URL to access the object for five minutes:
+
+    ```sh
+    gsutil signurl -d 5m key.json $bucket/ca.png
+    ```
 
 ## Tearing Down
 
